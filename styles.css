@@ -22,6 +22,11 @@ div.row div{
     background-size: cover;
 }
 
+/* .ghost{
+    background: url(./img/ghostpac.gif);
+    background-size: cover;
+} */
+
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -36,6 +41,13 @@ div.row div{
 
 #pacman{
     background: url(./img/pacman.gif);
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+#ghost{
+    background: url(./img/ghostpac.gif);
     background-size: cover;
     height: 20px;
     width: 20px;
