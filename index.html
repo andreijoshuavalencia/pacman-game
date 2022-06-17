@@ -12,52 +12,126 @@
         <div id="world"></div>
         <div id="pacman"></div>
         <div id="score">0</div>
+        <div id="cherry"></div>
+        <div class="button" onclick="reloadPage()">Click for new Map</div>
+        
     </div>
     
 
 
 
-
-
-
-
     <!-- Features of the Game
     1.) have JS display the world brick/coin/empty etc. ----- done
-    2.) Have pacman move up and down. ----------------------- 
+    2.) Have pacman move up and down. ----------------------- done
+
+    Make the maze a lot bigger and more interesting.  ------ done
+    Prevent the pacman from moving across the wall/brick. --- done
+    Have a cherry appear.  Cherry is worth 20 point. --------- done
+    Have up to 5 different maze/worlds.  When a page is reloaded, have one of the 5 randomly be chosen and shown on the page.  -----------------------------
+    Add ghosts that chase the pacman (keep it simple) ---------
     -->
     <script>
 
-        var world = [
-            [2,2,2,2,2,2,2,2,2,2],
-            [2,1,1,2,1,1,1,1,1,2],
-            [2,1,1,2,1,2,1,1,1,2],
-            [2,1,1,2,1,2,1,1,1,2],
-            [2,1,1,2,1,1,1,1,1,2],
-            [2,1,1,2,2,2,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,2,2,2,2,2,2,2,2,2]
+        var world1 = [
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2],
+            [2,1,1,1,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
         ];
-
+        var world2 = [
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+            [2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2],
+            [2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2],
+            [2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2],
+            [2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+        ];
+        var world3 = [
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            [2,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+        ];
+        var world4 = [
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            [2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,1,1,1,1,2],
+            [2,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2],
+            [2,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,2],
+            [2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,2],
+            [2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2],
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+        ];
+        var world5 = [
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,2,2,1,1,2,2,1,1,2,2,2,2,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,2,1,2,1,2,1,1,1,2,2,2,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,2,2,1,1,2,1,1,1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,2,2,2,1,1,2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+            [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+        ];
+        
+        var button = document.getElementsByClassName('button');
+        var currentworld;
         var score =0;
-
         var pacman = {
             x: 1,
             y: 1
         };
+        
+        function randomNumber(){
+            return Math.floor(Math.random() * 5) + 1;
+        }
+
+        let random = 'world'.concat('', randomNumber());
+
+        function reloadPage(){
+            location.reload();
+        }
 
         function displayWorld(){
             var output = "";
-            for(let i = 0; i <world.length; i++){ // the look of the world
+            let random = 'world'.concat('', randomNumber());
+            for(let i = 0; i <world1.length; i++){ // the look of the world
                 output += "\n<div class='row'>\n";
-                for(let j = 0; j < world[i].length; j++){
-                    if(world[i][j] == 2){
+                for(let j = 0; j < world3[i].length; j++){
+                    if(world1[i][j] == 3){
+                        output += "<div class='cherry'></div>";
+                    }
+                    if(world1[i][j] == 2){
                         output += "<div class='brick'></div>";
                     }
-                    if(world[i][j] == 1){
+                    if(world1[i][j] == 1){
                         output += "<div class='coin'></div>";
                     }
-                    if(world[i][j] == 0){
+                    if(world1[i][j] == 0){
                         output += "<div class='empty'></div>";
                     }
                 }
@@ -71,32 +145,36 @@
             document.getElementById('pacman').style.top = pacman.y*20 + "px";
             document.getElementById('pacman').style.left = pacman.x*20 + "px";
         }
-
+        
         function displayScore(){
             document.getElementById('score').innerHTML = score;
 
         }
-
         displayWorld();
         displayPacman();
         displayScore();
 
         document.onkeydown = function(e){
-            if(e.keyCode == 39){ //pacman movement
+            if(e.keyCode == 39 && world1[pacman.y][pacman.x+1] != 2){ //pacman movement
                 pacman.x++;
             }
-            else if(e.keyCode == 37 && world[pacman.y][pacman.x-1] != 2){
+            else if(e.keyCode == 37 && world1[pacman.y][pacman.x-1] != 2){
                 pacman.x--;
             }
-            else if(e.keyCode == 38){
+            else if(e.keyCode == 38 && world1[pacman.y-1][pacman.x] != 2){
                 pacman.y--;
             }
-            else if(e.keyCode == 40){
+            else if(e.keyCode == 40 && world1[pacman.y+1][pacman.x] != 2){
                 pacman.y++;
             }
-
-            if(world[pacman.y][pacman.x] == 1){ //pacman eats coin
-                world[pacman.y][pacman.x] = 0;
+            if(world1[pacman.y][pacman.x] == 3){ //pacman eats cherry
+                world1[pacman.y][pacman.x] = 0;
+                score += 5;
+                displayWorld();
+                displayScore();
+            }
+            if(world1[pacman.y][pacman.x] == 1){ //pacman eats coin
+                world1[pacman.y][pacman.x] = 0;
                 score++
                 displayWorld();
                 displayScore();
@@ -105,10 +183,5 @@
             displayPacman();
         };
     </script>
-
-
-
-
-
 </body>
 </html>
